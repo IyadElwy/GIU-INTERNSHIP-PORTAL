@@ -1,0 +1,61 @@
+{% extends 'userprofiles/profile_base.html' %}
+
+{% block profiletyple %}Admin{% endblock profiletyple %}
+
+{% block navitems %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin_profile' admin_profile_view.pk %}">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin_views_jobs' admin_profile_view.pk %}">Show Jobs</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin_list_employers' admin_profile_view.pk %}">Show Employers</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_students_admin' admin_profile_view.pk %}">Show Students</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_fac_rep' admin_profile_view.pk %}">Show Faculty Reps.</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_academic_advisor_admin'  admin_profile_view.pk %}">Show Academic
+            Advisors</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'list_career_oc_admin'  admin_profile_view.pk %}">Show Career OC.</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'article_new' admin_profile_view.pk %}">Post News</a>
+    </li>
+
+{% endblock navitems %}
+
+{% block profile_body %}
+
+    <br>
+    <div class="container">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">{{ admin_profile_view.user.username }}</h1>
+                <br>
+
+                <div class="article-entry">
+                    <p>Email: {{ admin_profile_view.user.email }}</p>
+                </div>
+                <p><a class="no_underline" href="{% url 'password_change' %}">Change Password</a> |
+                    <a class="no_underline" href="{% url 'user_delete' admin_profile_view.pk %}">Delete</a></p>
+
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+{% endblock profile_body %}
+
+
+
+

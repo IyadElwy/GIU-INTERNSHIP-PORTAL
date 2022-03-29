@@ -1,0 +1,42 @@
+{% extends 'userprofiles/profile_base.html' %}
+
+{% block profiletyple %}Faculty Representative{% endblock profiletyple %}
+
+{% block navitems %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'facrep_profile' facultyrep_profile_view.pk %}">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'fac_rep_views_jobs' facultyrep_profile_view.pk %}">Show Jobs</a>
+    </li>
+
+
+{% endblock navitems %}
+
+{% block profile_body %}
+
+    <br>
+    <div class="container">
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">{{ facultyrep_profile_view.user.username }}</h1>
+                <br>
+
+                <div class="article-entry">
+                    <p>Email: {{ facultyrep_profile_view.user.email }}</p>
+                    <p>Faculty: {{ facultyrep_profile_view.faculty }}</p>
+                </div>
+                <p><a class="no_underline" href="{% url 'facrep_edit' facultyrep_profile_view.pk %}">Edit</a> |
+                    <a class="no_underline" href="{% url 'password_change' %}">Change Password</a> |
+                    <a class="no_underline" href="{% url 'user_delete' facultyrep_profile_view.pk %}">Delete</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+{% endblock profile_body %}
+
+
+

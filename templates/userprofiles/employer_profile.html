@@ -1,0 +1,182 @@
+{% extends 'userprofiles/profile_base.html' %}
+{% load static %}
+
+{% block header_block %}
+    <link href="{% static 'css/google_maps.css' %}" rel="stylesheet">
+    <style type="text/css">
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 1000px;
+            /* The height is 400 pixels */
+            width: 300%;
+            /* The width is the width of the web page */
+        }
+
+        @media only screen and (max-width: 300px) {
+            .small_screen_vanish {
+                display: none;
+            }
+        }
+
+    </style>
+{% endblock header_block %}
+
+{% block profiletyple %}Employer{% endblock profiletyple %}
+
+{% block navitems %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'employer_profile' employer_profile_view.pk %}">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'employer_profile_status' employer_profile_view.pk %}">Profile Status</a>
+    </li>
+    <li class="nav-item">
+        {% if accepted == 'Accepted' %}
+            <a class="nav-link" href="{% url 'employer_posts_job' employer_profile_view.pk %}">Post Job</a>
+        {% else %}
+            <a class="nav-link" href="{% url 'employer_status_not_accepted' employer_profile_view.pk %}">Post Job</a>
+        {% endif %}
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'employer_show_posted_jobs' employer_profile_view.pk %}">Show posted jobs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'employer_show_applicationsByComp' employer_profile_view.pk %}">Show
+            Applications</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'employer_show_activeInternships' employer_profile_view.pk %}">Show
+            Active Internships</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'employer_pays_students' employer_profile_view.pk %}">
+            Ended Internships</a>
+    </li>
+
+
+
+{% endblock navitems %}
+
+{% block profile_body %}
+
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="row-justify-content-md-center">
+
+            <div class="row">
+                <div id="employer_info_div" style="" class="col-6">
+                    <div class="container-fluid py-5">
+                        <h1 class="display-5 fw-bold">{{ employer_profile_view.company_name }}</h1>
+                        <br>
+                        <p><strong>Username: </strong>{{ employer_profile_view.user.username }} </p>
+                        <p><strong>Email: </strong> {{ employer_profile_view.user.email }} </p>
+                        <p><strong>Company Address: </strong> {{ employer_profile_view.employer_address }}</p>
+                        <p><strong>Company Phone: </strong> {{ employer_profile_view.phone_number }}</p>
+                        {% if employer_profile_view.fax_number %}
+                            <p><strong>Fax Number: </strong> {{ employer_profile_view.fax_number }}</p>
+                        {% endif %}
+                        <p><strong>Industry: </strong> {{ employer_profile_view.industry }}</p>
+                        <p><strong>Type of business: </strong> {{ employer_profile_view.type_of_business }}</p>
+                        <p><strong>Products or services: </strong> {{ employer_profile_view.products_or_services }}</p>
+                        {% if employer_profile_view.number_of_current_employees %}
+                            <p>
+                                <strong>Current Employee count: </strong>
+                                {{ employer_profile_view.number_of_current_employees }}</p>
+                        {% endif %}
+
+                        <p><a class="no_underline"
+                              href="{% url 'employer_edit' employer_profile_view.pk %}">Edit</a> |
+                            <a class="no_underline" href="{% url 'password_change' %}">Change Password</a> |
+                            <a class="no_underline"
+                               href="{% url 'user_delete' employer_profile_view.pk %}">Delete</a>
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div id="profile_logo_card" class="col-6 d-none d-md-block">
+                    <br>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="card">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="200"
+                                     xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
+                                     preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title>
+                                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+                                        {% if not employer_profile_view.company_log %}
+                                            <img src="{{ employer_profile_view.company_logo.url }}"
+                                                 width="200" class="mx-auto"
+                                                 alt="Responsive image"/>
+                                            <br>
+                                        {% endif %}
+
+                                    </text>
+                                </svg>
+
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="javascript:void(0)"></a>
+                                        {{ employer_profile_view.website }}</h5>
+                                    <p class="card-text">{{ employer_profile_view.country_of_origin }}</p>
+                                    <p class="card-text">Est. {{ employer_profile_view.establishment_year }}</p>
+                                    <br>
+
+                                    <div class="row justify-content-md-center">
+                                        <div class="col-md-auto">
+                                            <div class="container">
+                                                <strong>Contact person</strong>
+                                                <p><a class="no_underline" href="
+{% url 'contact_person' employer_profile_view.pk %}">Show</a> | <a
+                                                        class="no_underline"
+                                                        href="
+{% url 'contact_person_edit' employer_profile_view.user.pk %}">Edit</a></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-auto">
+                                            <div class="container">
+                                                <strong>HR director</strong>
+                                                <p><a class="no_underline" href="
+{% url 'hrdirector' employer_profile_view.pk %}"> Show</a> |
+                                                    <a
+                                                            class="no_underline"
+                                                            href="
+{% url 'hrdirector_edit' employer_profile_view.pk %}">Edit</a></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                    </div>
+                </div>
+
+
+                <h1 id="loc_text" class="d-none d-md-block">Location</h1>
+                <!--The div element for the map -->
+                <div class="d-none d-md-block" id="map"></div>
+
+
+                <p hidden id="company_address">{{ employer_profile_view.employer_address }}</p>
+                <p hidden id="api_key">{{ google_maps_api_key }} </p>
+                <p hidden id="api_key_positions">{{ positions_api_key }} </p>
+
+                <script
+                        src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap&libraries=&v=weekly"
+                        async
+                ></script>
+                <script src="{% static 'js/google_maps.js' %}"></script>
+                <script src="{% static 'js/employer_profile.js' %}"></script>
+                <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock profile_body %}
+

@@ -1,0 +1,281 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--========== BOX ICONS ==========-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!--========== CSS ==========-->
+    <link rel="stylesheet" href="{% static 'css/cvstyles.css' %}">
+
+    <title>{{ resume_show_view.student_id.user.username }} resume</title>
+</head>
+<body class="scale-cv">
+<!--========== HEADER ==========-->
+<header class="l-header" id="header">
+    <nav class="nav bd-container">
+        <a href="#" class="nav__logo">Index</a>
+
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="#home" class="nav__link">
+                        <i class="bx bx-home nav__icon"></i>Home
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#profile" class="nav__link">
+                        <i class="bx bx-user nav__icon"></i>Profile
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#education" class="nav__link">
+                        <i class="bx bx-book nav__icon"></i>Education
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#skills" class="nav__link">
+                        <i class="bx bx-receipt nav__icon"></i>Skills
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#certificates" class="nav__link">
+                        <i class="bx bx-briefcase nav__icon"></i>Experience
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="nav__toggle" id="nav-toggle">
+            <i class="bx bx-grid-alt"></i>
+
+        </div>
+
+
+    </nav>
+</header>
+
+<main class=" l-main bd-container">
+    <!-- All elements within this div, is generated in PDF -->
+    <div class="resume" id="area-cv">
+        <div class="resume__left">
+            <!--========== HOME ==========-->
+            <section class="home" id="home">
+                <div class="home__container section bd-grid">
+                    <div class="home__data bd-grid">
+                        <img src="{{ resume_show_view.profile_image.url }}" alt="" class="home__img">
+                        {#                        <img src="{% static 'media/profile_images/default.png' %}" alt="" class="home__img">#}
+                        <h1 class="home__title">{{ resume_show_view.student_id.user.first_name }} <b>
+                            {{ resume_show_view.student_id.user.last_name }}</b></h1>
+                        <h3 class="home__profile">{{ resume_show_view.student_id.faculty }} Student</h3>
+
+                        <div>
+                        </div>
+                    </div>
+                    <div class="home--address bd-grid">
+                        <Span class="home__information">
+                            <i class="bx bx-map home__icon"></i> {{ resume_show_view.student_id.student_address }}
+                        </Span>
+
+                        <Span class="home__information">
+                            <i class="bx bx-envelope home__icon"></i> {{ resume_show_view.personal_email }}
+                        </Span>
+
+                        <Span class="home__information">
+                            <i class="bx bx-phone home__icon"></i> {{ resume_show_view.personal_phone }}
+                        </Span>
+                    </div>
+                </div>
+                <!-- Theme change button -->
+
+                <i class="bx bx-moon change-theme" title="Theme" id="theme-button"></i>
+
+                <!-- Button to generate and download the pdf. Available for desktop. -->
+
+                <i class="bx bx-download getnerate-pdf" title="Generate PDF" id="resume-button"
+                   onclick="generateResume()"></i>
+            </section>
+
+            <!--========== SOCIAL ==========-->
+            {% if resume_show_view.github_link != '' or resume_show_view.linked_in_link != '' %}
+                <section class="social section">
+                    <h2 class="section-title">SOCIAL</h2>
+                    <div class="social__container bd-grid">
+                        {% if resume_show_view.linked_in_link != '' %}
+                            <a href={{ resume_show_view.linked_in_link }} target="_blank"
+                               class="social__link">
+                                <i class="bx bxl-linkedin-square social__icon"></i> LinkedIn
+                            </a>
+                        {% endif %}
+                        {% if resume_show_view.github_link != '' %}
+                            <a href={{ resume_show_view.github_link }} target="_blank" class="social__link">
+                                <i class="bx bxl-github social__icon"></i> GitHub
+                            </a>
+                        {% endif %}
+                    </div>
+                </section>
+            {% endif %}
+
+            <!--========== PROFILE ==========-->
+            <section class="profile section" id="profile">
+                <h2 class="section-title">Profile</h2>
+                <p class="profile__description">{{ resume_show_view.student_id.cover_letter }}</p>
+            </section>
+
+            <!--========== EDUCATION ==========-->
+            <section class="education section" id="education">
+
+                <h2 class="section-title">Education</h2>
+                {% for education in resume_show_view.education_as_list %}
+
+                    <div class="education__container bd-grid">
+                        <div class="education__content">
+                            <div class="education__time">
+                            <span class="education__rounder">
+                            <span class="education__line"></span>
+                        </span>
+                            </div>
+                            <div class="education__date bd-grid">
+                                <h3 class="education__title">{{ education.0 }}</h3>
+                                <span class="education__studies">{{ education.1 }}</span>
+                                <span class="education__year">{{ education.2 }}</span>
+                                <span class="education__year">{{ education.3 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+
+
+            </section>
+            {#{{ resume_show_view. }}#}
+
+            <!--========== SKILLS  ==========-->
+            <section class="skills section" id="skills">
+                <h2 class="section-title">SKILLS</h2>
+                <div class="skills__content bd-grid">
+                    <ul class="skills__data">
+                        {% for skill in resume_show_view.skills_as_list %}
+
+                            <li class="skills__name">
+                                <span class="skills__circle"></span>{{ skill }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="resume__right">
+            <!--========== EXPERIENCE ==========-->
+            <section class="experience section" id="experience">
+
+                <h2 class="section-title">Experience</h2>
+
+                {% for experience in resume_show_view.experiences_as_list %}
+
+                    <div class="experience__container bd-grid">
+                    <div class="experience__content">
+                        <div class="experience__time">
+                            <span class=""></span>
+                            <span class="experience__line"></span>
+                        </div>
+                        <div class="experience__date bd-grid">
+                            <h3 class="experience__title">{{ experience.0 }}</h3>
+                            <span class="experience__company">{{ experience.1 }}</span>
+                            <p class="experience__description">{{ experience.2 }}</p>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+
+            </section>
+
+            <!--========== CERTIFICATES ==========-->
+            <section class="certificate section" id="certificates">
+                <h2 class="section-title">Achievements</h2>
+                <div class="certificate__container">
+
+                    {% for achievement in resume_show_view.achievements_as_list %}
+                        <div class="certificate">
+                            <h3 class="certificate__title">
+                                {{ achievement.0 }}</h3>
+                            <p class="certificate__description">{{ achievement.1 }}</p>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </section>
+
+
+            <section class="certificate section" id="certificates">
+                <h2 class="section-title">Extracurricular Activities</h2>
+                <div class="certificate__container">
+
+                    {% for activity in resume_show_view.extracurricular_activities_as_list %}
+                        <div class="certificate">
+                            <h3 class="certificate__title">
+                                {{ activity.0 }}</h3>
+                            <p class="certificate__description">{{ activity.1 }}</p>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </section>
+
+
+            <!--========== LANGUAGES ==========-->
+            <section class="languages section">
+                <h2 class="section-title">Languages</h2>
+                <div class="languages__container">
+                    <ul class="languages__content bd-grid">
+
+                        {% for language in resume_show_view.languages_as_list %}
+                            <li class="languages__name">
+                                <span class="languages__circle"></span> {{ language }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+
+            <!--========== INTERESTS ==========-->
+            <section class="interests section">
+                <h2 class="section-title">Interests</h2>
+                <div class="interests__container bd-grid">
+                    {% for interest in resume_show_view.interests_as_list %}
+                        <div class="interests__content">
+                            <span class="interests__name">{{ interest }}</span>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+<!--========== SCROLL TOP ==========-->
+<a class="scrolltop" id="scroll-top" href="#">
+    <i class="bx bx-up-arrow-alt scrolltop__icon"></i>
+</a>
+
+<!--========== HTML2PDF ==========-->
+<script src="{% static 'js/html2pdf.bundle.min.js' %}"></script>
+
+<!--========== MAIN JS ==========-->
+<script src="{% static 'js/cvmain.js' %}"></script>
+</body>
+</html>

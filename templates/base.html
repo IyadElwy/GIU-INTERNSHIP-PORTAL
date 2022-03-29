@@ -1,0 +1,186 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width,
+  initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'images/giu_icon.png' %}">
+    {% block header_block %}
+
+    {% endblock header_block %}
+
+</head>
+<body>
+
+<main class="m-scene" id="main">
+
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="{% url 'home' %}" class="nav-link px-2 text-secondary">GIU Internship Portal</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                    <li><a href="{% url 'allcompanies' %}" class="nav-link px-2 text-white">Companies</a></li>
+                    <li><a href="{% url 'generic_job_view' %}" class="nav-link px-2 text-white">Jobs</a></li>
+                    {% block giuwebsite %}{% endblock giuwebsite %}
+                    <li><a href="{% url 'article_list' %}" class="nav-link px-2 text-white">News</a></li>
+                    <li><a href="{% url 'help' %}" class="nav-link px-2 text-white">Help</a></li>
+
+                </ul>
+
+
+                {% if user.is_authenticated %}
+                    <div class="text-end">
+                        <a href="{% url 'logout' %}" class="no_underline">
+                            <button type="button" class="btn btn-outline-light me-2">Logout
+                            </button>
+                        </a>
+                        {% if user.is_student %}
+                            <a href="{% url 'student_profile' user.pk %}" class="no_underline">
+                                <button type="button" class="btn btn-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                    </svg>
+                                </button>
+                            </a>
+                        {% endif %}
+                        {% if user.is_employer %}
+                            <a href="{% url 'employer_profile' user.pk %}" class="no_underline">
+                                <button type="button" class="btn btn-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                    </svg>
+                                </button>
+                            </a>
+
+                        {% endif %}
+                        {% if user.is_admin %}
+                            <a href="{% url 'admin_profile' user.pk %}" class="no_underline">
+                                <button type="button" class="btn btn-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                    </svg>
+                                </button>
+                            </a>
+
+                        {% endif %}
+                        {% if user.is_faculty_representative %}
+                            <a href="{% url 'facrep_profile' user.pk %}" class="no_underline">
+                                <button type="button" class="btn btn-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                    </svg>
+                                </button>
+                            </a>
+
+                        {% endif %}
+                        {% if user.is_academic_advisor %}
+                            <a href="{% url 'acadadv_profile' user.pk %}" class="no_underline">
+                                <button type="button" class="btn btn-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                    </svg>
+                                </button>
+                            </a>
+
+                        {% endif %}
+                        {% if user.is_career_office_coordinator %}
+                            <a href="{% url 'careerofc_profile' user.pk %}" class="no_underline">
+                                <button type="button" class="btn btn-warning">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                         class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                                    </svg>
+                                </button>
+                            </a>
+
+                        {% endif %}
+                        <a href="{% url 'message_home_page' user.pk %}" class="no_underline">
+                            <button type="button" class="btn btn-warning">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+                                </svg>
+                            </button>
+                        </a>
+
+                    </div>
+                {% else %}
+
+                    <div class="text-end">
+                        <a href="{% url 'login' %}" class="no_underline">
+                            <button type="button" class="btn btn-outline-light me-2">Login
+                            </button>
+                        </a>
+                        <a href="{% url 'student_signup' %}" class="no_underline">
+                            <button type="button" class="btn btn-warning">Sign up</button>
+                        </a>
+                    </div>
+
+                {% endif %}
+
+
+            </div>
+        </div>
+    </header>
+    {% block body_content %}
+
+    {% endblock body_content %}
+
+
+
+
+    <div class="container">
+        <br>
+
+
+        <main>
+            {% block content %}
+
+
+            {% endblock content %}
+        </main>
+    </div>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery.smoothState.js' %}"></script>
+
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+
+</main>
+
+
+{% block normalBlock %}
+
+{% endblock normalBlock %}
+
+</body>
+</html>
