@@ -83,6 +83,8 @@ class StudentSignUpForm(UserCreationForm):
                          f'<p>Username: {username} </p>'
                          f'<p>Password: {pw} </p>')
         try:
+            print('Sending mail with password...')
+            print(f'Password for {username}: {pw}')
             sg = SendGridAPIClient(settings.SENDGRID_API)
             response = sg.send(message)
             print(response.status_code)
@@ -164,6 +166,9 @@ class EmployerSignUpForm(UserCreationForm):
                          f'<p>Username: {username} </p>'
                          f'<p>Password: {pw} </p>')
         try:
+            print('Sending mail with password...')
+            print(f'Password for {username}: {pw}')
+
             sg = SendGridAPIClient(settings.SENDGRID_API)
             response = sg.send(message)
             print(response.status_code)
