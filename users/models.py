@@ -34,8 +34,9 @@ class Employer(models.Model):
     industry = models.CharField(max_length=20)
     number_of_current_employees = models.PositiveIntegerField(null=True, blank=True)
     products_or_services = models.CharField(max_length=30)
-    company_logo = models.ImageField(upload_to=str(settings.MEDIA_ROOT) + '/company_images/', blank=True, null=True,
-                                     default='company_images/default.png', max_length=1000)
+
+    # company_logo = models.ImageField(upload_to=str(settings.MEDIA_ROOT) + '/company_images/', blank=True, null=True,
+    #                                  default='company_images/default.png', max_length=1000)
 
     def __str__(self):
         return self.company_name

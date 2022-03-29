@@ -34,7 +34,7 @@ PORT = os.getenv("PORT", default="5000")
 SECRET_KEY = 'django-insecure-b)h8su_0+#80_ryur#3*(^=80n16gc6ywn0*1bv+=x%qf4yg_j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
