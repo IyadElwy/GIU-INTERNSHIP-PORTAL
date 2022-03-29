@@ -24,6 +24,9 @@ GOOGLE_MAPS_API_KEY = os.environ.get('google_maps_api_key')
 POSITION_API = os.environ.get('position_stack_api')
 SENDGRID_API = os.environ.get('SENDGRIDAPIKEY')
 DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD')
+
+PORT = os.getenv("PORT", default="5000")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -31,7 +34,7 @@ DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD')
 SECRET_KEY = 'django-insecure-b)h8su_0+#80_ryur#3*(^=80n16gc6ywn0*1bv+=x%qf4yg_j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
