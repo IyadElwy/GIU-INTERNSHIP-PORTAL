@@ -73,8 +73,8 @@
             <section class="home" id="home">
                 <div class="home__container section bd-grid">
                     <div class="home__data bd-grid">
-                        <img src="{{ resume_show_view.profile_image.url }}" alt="" class="home__img">
-                        {#                        <img src="{% static 'media/profile_images/default.png' %}" alt="" class="home__img">#}
+                        <!--                        <img src="{{ resume_show_view.profile_image.url }}" alt="" class="home__img">-->
+                        <!--                        {#                        <img src="{% static 'media/profile_images/default.png' %}" alt="" class="home__img">#}-->
                         <h1 class="home__title">{{ resume_show_view.student_id.user.first_name }} <b>
                             {{ resume_show_view.student_id.user.last_name }}</b></h1>
                         <h3 class="home__profile">{{ resume_show_view.student_id.faculty }} Student</h3>
@@ -108,22 +108,22 @@
 
             <!--========== SOCIAL ==========-->
             {% if resume_show_view.github_link != '' or resume_show_view.linked_in_link != '' %}
-                <section class="social section">
-                    <h2 class="section-title">SOCIAL</h2>
-                    <div class="social__container bd-grid">
-                        {% if resume_show_view.linked_in_link != '' %}
-                            <a href={{ resume_show_view.linked_in_link }} target="_blank"
-                               class="social__link">
-                                <i class="bx bxl-linkedin-square social__icon"></i> LinkedIn
-                            </a>
-                        {% endif %}
-                        {% if resume_show_view.github_link != '' %}
-                            <a href={{ resume_show_view.github_link }} target="_blank" class="social__link">
-                                <i class="bx bxl-github social__icon"></i> GitHub
-                            </a>
-                        {% endif %}
-                    </div>
-                </section>
+            <section class="social section">
+                <h2 class="section-title">SOCIAL</h2>
+                <div class="social__container bd-grid">
+                    {% if resume_show_view.linked_in_link != '' %}
+                    <a href={{ resume_show_view.linked_in_link }} target="_blank"
+                       class="social__link">
+                        <i class="bx bxl-linkedin-square social__icon"></i> LinkedIn
+                    </a>
+                    {% endif %}
+                    {% if resume_show_view.github_link != '' %}
+                    <a href={{ resume_show_view.github_link }} target="_blank" class="social__link">
+                        <i class="bx bxl-github social__icon"></i> GitHub
+                    </a>
+                    {% endif %}
+                </div>
+            </section>
             {% endif %}
 
             <!--========== PROFILE ==========-->
@@ -138,22 +138,22 @@
                 <h2 class="section-title">Education</h2>
                 {% for education in resume_show_view.education_as_list %}
 
-                    <div class="education__container bd-grid">
-                        <div class="education__content">
-                            <div class="education__time">
+                <div class="education__container bd-grid">
+                    <div class="education__content">
+                        <div class="education__time">
                             <span class="education__rounder">
                             <span class="education__line"></span>
                         </span>
-                            </div>
-                            <div class="education__date bd-grid">
-                                <h3 class="education__title">{{ education.0 }}</h3>
-                                <span class="education__studies">{{ education.1 }}</span>
-                                <span class="education__year">{{ education.2 }}</span>
-                                <span class="education__year">{{ education.3 }}</span>
-                            </div>
+                        </div>
+                        <div class="education__date bd-grid">
+                            <h3 class="education__title">{{ education.0 }}</h3>
+                            <span class="education__studies">{{ education.1 }}</span>
+                            <span class="education__year">{{ education.2 }}</span>
+                            <span class="education__year">{{ education.3 }}</span>
                         </div>
                     </div>
-                    <br>
+                </div>
+                <br>
                 {% endfor %}
 
 
@@ -167,9 +167,9 @@
                     <ul class="skills__data">
                         {% for skill in resume_show_view.skills_as_list %}
 
-                            <li class="skills__name">
-                                <span class="skills__circle"></span>{{ skill }}
-                            </li>
+                        <li class="skills__name">
+                            <span class="skills__circle"></span>{{ skill }}
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -185,7 +185,7 @@
 
                 {% for experience in resume_show_view.experiences_as_list %}
 
-                    <div class="experience__container bd-grid">
+                <div class="experience__container bd-grid">
                     <div class="experience__content">
                         <div class="experience__time">
                             <span class=""></span>
@@ -198,7 +198,7 @@
                         </div>
                     </div>
 
-                {% endfor %}
+                    {% endfor %}
 
 
             </section>
@@ -209,11 +209,11 @@
                 <div class="certificate__container">
 
                     {% for achievement in resume_show_view.achievements_as_list %}
-                        <div class="certificate">
-                            <h3 class="certificate__title">
-                                {{ achievement.0 }}</h3>
-                            <p class="certificate__description">{{ achievement.1 }}</p>
-                        </div>
+                    <div class="certificate">
+                        <h3 class="certificate__title">
+                            {{ achievement.0 }}</h3>
+                        <p class="certificate__description">{{ achievement.1 }}</p>
+                    </div>
                     {% endfor %}
 
                 </div>
@@ -225,11 +225,11 @@
                 <div class="certificate__container">
 
                     {% for activity in resume_show_view.extracurricular_activities_as_list %}
-                        <div class="certificate">
-                            <h3 class="certificate__title">
-                                {{ activity.0 }}</h3>
-                            <p class="certificate__description">{{ activity.1 }}</p>
-                        </div>
+                    <div class="certificate">
+                        <h3 class="certificate__title">
+                            {{ activity.0 }}</h3>
+                        <p class="certificate__description">{{ activity.1 }}</p>
+                    </div>
                     {% endfor %}
 
                 </div>
@@ -243,9 +243,9 @@
                     <ul class="languages__content bd-grid">
 
                         {% for language in resume_show_view.languages_as_list %}
-                            <li class="languages__name">
-                                <span class="languages__circle"></span> {{ language }}
-                            </li>
+                        <li class="languages__name">
+                            <span class="languages__circle"></span> {{ language }}
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -256,9 +256,9 @@
                 <h2 class="section-title">Interests</h2>
                 <div class="interests__container bd-grid">
                     {% for interest in resume_show_view.interests_as_list %}
-                        <div class="interests__content">
-                            <span class="interests__name">{{ interest }}</span>
-                        </div>
+                    <div class="interests__content">
+                        <span class="interests__name">{{ interest }}</span>
+                    </div>
                     {% endfor %}
 
                 </div>
