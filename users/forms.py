@@ -147,7 +147,8 @@ class EmployerSignUpForm(UserCreationForm):
                   'industry',
                   'number_of_current_employees',
                   'products_or_services',
-                  'company_logo')
+                  # 'company_logo'
+                  )
 
     @transaction.atomic
     def save(self):
@@ -199,7 +200,7 @@ class EmployerSignUpForm(UserCreationForm):
                                                   number_of_current_employees=self.cleaned_data.get(
                                                       'number_of_current_employees'),
                                                   products_or_services=self.cleaned_data.get('products_or_services'),
-                                                  company_logo=self.cleaned_data.get('company_logo')
+                                                  # company_logo=self.cleaned_data.get('company_logo')
                                                   )
         employer_profile_status = ReviewProfile.objects.create(employer_id=employer)
         employer_profile_status.save()
