@@ -103,6 +103,7 @@ class Application(models.Model):
     has_ended = models.BooleanField(default=False, blank=True)
     has_started = models.BooleanField(default=False, blank=True)
     confirm = models.BooleanField(default=False, blank=True)
+    cover_letter = models.TextField()
 
     def __str__(self):
         return f'{self.job_id.title}'

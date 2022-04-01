@@ -651,7 +651,7 @@ class StudentShowPastInternships(LoginRequiredMixin, UserPassesTestMixin, ListVi
 class StudentConfirmApply(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Application
     template_name = 'portal/student_apply_for_job.html'
-    fields = ('confirm',)
+    fields = ('cover_letter', 'confirm')
     context_object_name = 'student_apply_for_job'
     login_url = 'login'
     success_url = 'successful_application'
