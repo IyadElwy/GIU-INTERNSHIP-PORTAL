@@ -126,5 +126,13 @@ When logging in as an Academic Advisor:
 - Show Progress Reports: Read and evaluate progress reports
 
 __Duo to the limitations of the free hosting service some functionality may not work properly like the emailing or
-messaging feature. However those limitation will not remain if chosen to professionally host the platform when shipped
+messaging feature. Dynamic files such as pdf cover letters and images also require a premium hosting tier. However 
+those 
+limitation will 
+not 
+remain if 
+chosen to professionally host 
+the 
+platform 
+when shipped
 to production.__
