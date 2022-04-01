@@ -667,6 +667,7 @@ class StudentConfirmApply(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         pk = self.kwargs["pk"]
         job = Job(pk=pk)
         form.instance.job_id = job
+
         # pass parameter of job when calling this view so make url take in primary key of job
         return super().form_valid(form)
 
