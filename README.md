@@ -1,5 +1,7 @@
 # The GIU Internship Portal
 
+Hosted [here](https://aqueous-headland-97420.herokuapp.com/)
+
 #### This document contains a small guide which gives you a general walkthrough as well as a more detailed one for each user. Below each user guide you will find the respective log-in information.
 
 *The data found on the portal is only intended for demonstration purposes; those companies are not registered on the
